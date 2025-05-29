@@ -3,6 +3,7 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -19,6 +20,7 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
+@Tag(name = "Spring RestTemplate")
 @RequestMapping("/rest-template")
 public class RestTemplateController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

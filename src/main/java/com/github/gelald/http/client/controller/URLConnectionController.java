@@ -4,6 +4,7 @@ import cn.hutool.http.Header;
 import cn.hutool.http.Method;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.Scanner;
 
 @Slf4j
 @RestController
+@Tag(name = "JDK HttpURLConnection")
 @RequestMapping("/url-connection")
 public class URLConnectionController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,2 +1,21 @@
 server:
   port: 18800
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: order
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      display-name: 'http-client test cases'
+      paths-to-match: '/**'
+      packages-to-scan: com.github.gelald.http.client
+  default-flat-param-object: true
+
+knife4j:
+  enable: true
+  setting:
+    language: ZH_CN

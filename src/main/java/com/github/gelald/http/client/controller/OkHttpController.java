@@ -4,6 +4,7 @@ import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,6 +18,7 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
+@Tag(name = "OkHttp3")
 @RequestMapping("/ok-http")
 public class OkHttpController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -3,6 +3,7 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
+@Tag(name = "JDK11 HttpClient")
 @RequestMapping("/http-client")
 public class HttpClientController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

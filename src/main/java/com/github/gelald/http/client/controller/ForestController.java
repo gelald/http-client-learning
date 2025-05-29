@@ -4,6 +4,7 @@ import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
+@Tag(name = "Forest")
 @RequestMapping("/forest")
 public class ForestController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
