@@ -4,6 +4,9 @@ import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -18,9 +21,13 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "OkHttp3")
+@Tag(name = "OkHttp3", description = "OkHttp3 component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "400", parseValue = true)})
+})
 @RequestMapping("/ok-http")
 public class OkHttpController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) {
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -58,6 +65,7 @@ public class OkHttpController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) {
         OkHttpClient client = new OkHttpClient().newBuilder()

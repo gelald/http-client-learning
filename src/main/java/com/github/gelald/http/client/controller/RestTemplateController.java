@@ -3,6 +3,9 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -20,9 +23,13 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "Spring RestTemplate")
+@Tag(name = "Spring RestTemplate", description = "Spring RestTemplate component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "500", parseValue = true)})
+})
 @RequestMapping("/rest-template")
 public class RestTemplateController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) {
         SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
@@ -51,6 +58,7 @@ public class RestTemplateController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) {
         SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();

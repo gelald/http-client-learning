@@ -4,6 +4,9 @@ import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -18,9 +21,13 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "WebClient")
+@Tag(name = "WebClient", description = "WebClient component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "700", parseValue = true)})
+})
 @RequestMapping("/web-client")
 public class WebClientController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<JSONObject> get(@RequestParam("param") String param) {
         HttpClient httpClient = HttpClient.create()
@@ -53,6 +60,7 @@ public class WebClientController {
         return result;
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<JSONObject> post(@RequestBody JSONObject param) {
         HttpClient httpClient = HttpClient.create()

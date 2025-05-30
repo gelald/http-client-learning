@@ -4,6 +4,9 @@ import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -14,9 +17,13 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "Forest")
+@Tag(name = "Forest", description = "Forest component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "900", parseValue = true)})
+})
 @RequestMapping("/forest")
 public class ForestController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) {
         ForestConfiguration config = Forest.config();
@@ -38,6 +45,7 @@ public class ForestController {
         return result;
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) {
         ForestConfiguration config = Forest.config();

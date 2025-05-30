@@ -3,6 +3,9 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -19,9 +22,13 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "JDK11 HttpClient")
+@Tag(name = "JDK11 HttpClient", description = "JDK11 HttpClient component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "200", parseValue = true)})
+})
 @RequestMapping("/http-client")
 public class HttpClientController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) throws URISyntaxException {
         HttpClient httpClient = HttpClient.newBuilder()
@@ -57,6 +64,7 @@ public class HttpClientController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) throws URISyntaxException {
         HttpClient httpClient = HttpClient.newBuilder()

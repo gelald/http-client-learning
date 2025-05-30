@@ -3,6 +3,9 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.http.Header;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -31,9 +34,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Tag(name = "Apache HttpClient5")
+// 找了半天为什么无法对Controller排序：https://gitee.com/xiaoym/knife4j/issues/I7U2I0
+@Tag(name = "Apache HttpClient5", description = "Apache HttpClient5 component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "300", parseValue = true)})
+})
 @RequestMapping("/apache-http-client")
 public class ApacheHttpClientController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) throws URISyntaxException {
         // request param
@@ -73,6 +81,7 @@ public class ApacheHttpClientController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) throws URISyntaxException {
         URI uri = new URIBuilder(new URI("http://httpbin.org/post")).build();

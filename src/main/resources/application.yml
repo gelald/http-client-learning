@@ -3,14 +3,16 @@ server:
 
 springdoc:
   swagger-ui:
+    enabled: true
     path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: order
+    tags-sorter: order
+    operations-sorter: alpha
   api-docs:
+    enabled: true
     path: /v3/api-docs
   group-configs:
     - group: 'default'
-      display-name: 'http-client test cases'
+      display-name: 'http-client-test-cases'
       paths-to-match: '/**'
       packages-to-scan: com.github.gelald.http.client
   default-flat-param-object: true

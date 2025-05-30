@@ -3,6 +3,9 @@ package com.github.gelald.http.client.controller;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.gelald.http.client.api.RetrofitClient;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -19,9 +22,13 @@ import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @RestController
-@Tag(name = "Retrofit")
+@Tag(name = "Retrofit", description = "Retrofit component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "800", parseValue = true)})
+})
 @RequestMapping("/retrofit")
 public class RetrofitController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject get(@RequestParam("param") String param) {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
@@ -58,6 +65,7 @@ public class RetrofitController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject post(@RequestBody JSONObject param) {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()

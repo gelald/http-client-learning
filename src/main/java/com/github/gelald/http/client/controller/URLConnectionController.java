@@ -4,6 +4,9 @@ import cn.hutool.http.Header;
 import cn.hutool.http.Method;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -19,9 +22,13 @@ import java.util.Scanner;
 
 @Slf4j
 @RestController
-@Tag(name = "JDK HttpURLConnection")
+@Tag(name = "JDK HttpURLConnection", description = "JDK HttpURLConnection component demo", extensions = {
+        @Extension(properties = {@ExtensionProperty(name = "x-order", value = "100", parseValue = true)})
+})
 @RequestMapping("/url-connection")
 public class URLConnectionController {
+
+    @Operation(summary = "Get", description = "Get demo")
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object get(@RequestParam("param") String param) throws IOException {
         // request param
@@ -53,6 +60,7 @@ public class URLConnectionController {
         }
     }
 
+    @Operation(summary = "Post", description = "Post demo")
     @RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object post(@RequestBody JSONObject jsonObject) throws IOException {
         URL url = new URL("http://httpbin.org/post");
